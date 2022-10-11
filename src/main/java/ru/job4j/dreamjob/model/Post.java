@@ -5,9 +5,9 @@ import java.util.Objects;
 
 public class Post {
     private final int id;
-    String name;
-    String description;
-    LocalDate created;
+    private String name;
+    private String description;
+    private LocalDate created;
 
     public Post(int id, String name, String description, LocalDate created) {
         this.id = id;
@@ -41,12 +41,11 @@ public class Post {
             return false;
         }
         Post post = (Post) o;
-        return id == post.id && Objects.equals(name, post.name)
-                && Objects.equals(description, post.description) && Objects.equals(created, post.created);
+        return id == post.id;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, description, created);
+        return Objects.hash(id);
     }
 }
