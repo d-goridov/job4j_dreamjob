@@ -9,7 +9,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class CandidateStore {
     private static final CandidateStore INST = new CandidateStore();
-    Map<Integer, Candidate> candidates = new ConcurrentHashMap<>();
+    private Map<Integer, Candidate> candidates = new ConcurrentHashMap<>();
 
     private CandidateStore() {
         candidates.put(1, new Candidate(1, "Petr", "Candidate for Java Lead", LocalDate.now()));
