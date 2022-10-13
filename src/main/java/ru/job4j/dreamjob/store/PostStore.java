@@ -6,10 +6,12 @@ import java.time.LocalDate;
 import java.util.Collection;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class PostStore {
     private static final PostStore INST = new PostStore();
     private Map<Integer, Post> posts = new ConcurrentHashMap<>();
+    AtomicInteger counter = new AtomicInteger(3);
 
     private PostStore() {
         posts.put(1, new Post(1, "Java Trainee", "description of Java Trainee", LocalDate.now()));
@@ -22,5 +24,11 @@ public class PostStore {
     }
     public Collection<Post> findAll() {
         return posts.values();
+    }
+
+    public void add(Post post) {
+        int id = counter.incrementAndGet();
+        post.setId(id);
+        posts.putIfAbsent(id, post);
     }
 }
