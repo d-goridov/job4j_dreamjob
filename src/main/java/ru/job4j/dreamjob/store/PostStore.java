@@ -10,8 +10,8 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class PostStore {
     private static final PostStore INST = new PostStore();
-    private Map<Integer, Post> posts = new ConcurrentHashMap<>();
-    AtomicInteger counter = new AtomicInteger(3);
+    private final Map<Integer, Post> posts = new ConcurrentHashMap<>();
+    private final AtomicInteger counter = new AtomicInteger(3);
 
     private PostStore() {
         posts.put(1, new Post(1, "Java Trainee", "description of Java Trainee", LocalDate.now()));
