@@ -31,4 +31,15 @@ public class PostStore {
         post.setId(id);
         posts.putIfAbsent(id, post);
     }
+
+    public Post findById(int id) {
+        return posts.get(id);
+    }
+
+    public void update(Post post) {
+        int id = post.getId();
+        Post forEdit = findById(id);
+        post.setCreated(forEdit.getCreated());
+        posts.replace(id, post);
+    }
 }
