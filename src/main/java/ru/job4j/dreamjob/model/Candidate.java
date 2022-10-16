@@ -4,10 +4,13 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 public class Candidate {
-    private final int id;
+    private int id;
     private String name;
     private String desc;
     private LocalDate created;
+
+    public Candidate() {
+    }
 
     public Candidate(int id, String name, String desc, LocalDate created) {
         this.id = id;
@@ -30,6 +33,22 @@ public class Candidate {
 
     public LocalDate getCreated() {
         return created;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setDesc(String desc) {
+        this.desc = desc;
+    }
+
+    public void setCreated(LocalDate created) {
+        this.created = created;
     }
 
     @Override
