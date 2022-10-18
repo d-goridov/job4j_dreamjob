@@ -1,4 +1,4 @@
-package ru.job4j.dreamjob.control;
+package ru.job4j.dreamjob.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,7 +12,7 @@ import ru.job4j.dreamjob.store.PostStore;
 import java.time.LocalDate;
 
 @Controller
-public class PostControl {
+public class PostController {
     private final PostStore store = PostStore.getInst();
 
     @GetMapping("/posts")
