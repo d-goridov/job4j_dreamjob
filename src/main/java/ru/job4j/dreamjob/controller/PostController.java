@@ -12,6 +12,7 @@ import ru.job4j.dreamjob.service.PostService;
 
 import java.time.LocalDate;
 
+
 @Controller
 @ThreadSafe
 public class PostController {
@@ -30,7 +31,8 @@ public class PostController {
 
     @GetMapping("/formAddPost")
     public String addPost(Model model) {
-        model.addAttribute("post", new Post(0, "Заполните поле"));
+        model.addAttribute("post", new Post(0, "Заполните название",
+                "Заполните описание", LocalDate.now()));
         return "addPost";
     }
     @PostMapping("/createPost")
