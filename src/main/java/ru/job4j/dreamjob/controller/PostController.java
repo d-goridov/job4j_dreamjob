@@ -32,7 +32,7 @@ public class PostController {
     @GetMapping("/formAddPost")
     public String addPost(Model model) {
         model.addAttribute("post", new Post(0, "Заполните название",
-                "Заполните описание", LocalDate.now()));
+                "Заполните описание", LocalDate.now(), false));
         return "addPost";
     }
     @PostMapping("/createPost")

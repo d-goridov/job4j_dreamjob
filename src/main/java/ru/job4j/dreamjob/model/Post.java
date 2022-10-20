@@ -13,11 +13,12 @@ public class Post {
     public Post() {
     }
 
-    public Post(int id, String name, String description, LocalDate created) {
+    public Post(int id, String name, String description, LocalDate created, boolean visible) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.created = created;
+        this.visible = visible;
     }
 
     public int getId() {

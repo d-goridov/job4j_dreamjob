@@ -18,9 +18,12 @@ public class PostStore {
     private final AtomicInteger counter = new AtomicInteger(3);
 
     private PostStore() {
-        posts.put(1, new Post(1, "Java Trainee", "description of Java Trainee", LocalDate.now()));
-        posts.put(2, new Post(2, "Java Junior", "description of Java Junior", LocalDate.now()));
-        posts.put(3, new Post(3, "Java Lead", "description of Java Lead", LocalDate.now()));
+        posts.put(1, new Post(1, "Java Trainee", "description of Java Trainee",
+                LocalDate.now(), false));
+        posts.put(2, new Post(2, "Java Junior", "description of Java Junior",
+                LocalDate.now(), false));
+        posts.put(3, new Post(3, "Java Lead", "description of Java Lead",
+                LocalDate.now(), false));
     }
 
     public Collection<Post> findAll() {
