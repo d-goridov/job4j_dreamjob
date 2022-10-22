@@ -9,6 +9,7 @@ public class Candidate {
     private String desc;
     private LocalDate created;
     private City city;
+    private byte[] photo;
 
     public Candidate() {
     }
@@ -58,6 +59,14 @@ public class Candidate {
 
     public void setCreated(LocalDate created) {
         this.created = created;
+    }
+
+    public byte[] getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(byte[] photo) {
+        this.photo = photo;
     }
 
     @Override
