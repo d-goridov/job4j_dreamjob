@@ -8,6 +8,7 @@ public class Candidate {
     private String name;
     private String desc;
     private LocalDate created;
+    private City city;
 
     public Candidate() {
     }
@@ -45,6 +46,14 @@ public class Candidate {
 
     public void setDesc(String desc) {
         this.desc = desc;
+    }
+
+    public City getCity() {
+        return city;
+    }
+
+    public void setCity(City city) {
+        this.city = city;
     }
 
     public void setCreated(LocalDate created) {

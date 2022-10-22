@@ -9,6 +9,7 @@ public class Post {
     private String description;
     private LocalDate created;
     private boolean visible;
+    private City city;
 
     public Post() {
     }
@@ -59,6 +60,14 @@ public class Post {
 
     public void setVisible(boolean visible) {
         this.visible = visible;
+    }
+
+    public City getCity() {
+        return city;
+    }
+
+    public void setCity(City city) {
+        this.city = city;
     }
 
     @Override
