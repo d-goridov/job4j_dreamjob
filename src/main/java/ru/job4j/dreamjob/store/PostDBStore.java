@@ -14,25 +14,35 @@ import java.util.List;
 @Repository
 public class PostDBStore {
 
-    private final BasicDataSource pool;
+    private static final String SHOW_ALL = "SELECT * FROM post";
+    private static final String INSERT = "INSERT INTO post(name, description, created, visible, city_id) "
+            + " VALUES (?, ?, ?, ?, ?)";
+    private static final String UPDATE = "UPDATE post SET name = ?, description = ?, created = ?, "
+            + "visible = ?, city_id = ? where id = ?";
+    private static final String GET_BY_ID = "SELECT * FROM post WHERE id = ?";
     private static final Logger LOG = LoggerFactory.getLogger(PostDBStore.class.getName());
+    private final BasicDataSource pool;
 
     public PostDBStore(BasicDataSource pool) {
         this.pool = pool;
     }
+
+    private Post postOf(ResultSet resultset) throws SQLException {
+        return new Post(resultset.getInt("id"),
+                        resultset.getString("name"),
+                        resultset.getString("description"),
+                        resultset.getDate("created").toLocalDate(),
+                        resultset.getBoolean("visible"),
+                        new City(resultset.getInt("city_id"), ""));
+    }
     public List<Post> findAll() {
         List<Post> posts = new ArrayList<>();
         try (Connection cn = pool.getConnection();
-            PreparedStatement ps = cn.prepareStatement("SELECT * FROM post")
+            PreparedStatement ps = cn.prepareStatement(SHOW_ALL)
         ) {
             try (ResultSet it = ps.executeQuery()) {
                 while (it.next()) {
-                    posts.add(new Post(it.getInt("id"),
-                            it.getString("name"),
-                            it.getString("description"),
-                            it.getDate("created").toLocalDate(),
-                            it.getBoolean("visible"),
-                            new City(it.getInt("city_id"), "")));
+                    posts.add(postOf(it));
                 }
             }
         } catch (Exception e) {
@@ -43,10 +53,7 @@ public class PostDBStore {
 
     public Post add(Post post) {
         try (Connection cn = pool.getConnection();
-            PreparedStatement ps = cn.prepareStatement(
-                    "INSERT INTO post(name, description, created, visible, city_id)  VALUES (?, ?, ?, ?, ?)",
-                PreparedStatement.RETURN_GENERATED_KEYS)
-        ) {
+             PreparedStatement ps = cn.prepareStatement(INSERT, PreparedStatement.RETURN_GENERATED_KEYS)) {
             ps.setString(1, post.getName());
             ps.setString(2, post.getDescription());
             ps.setDate(3, Date.valueOf(post.getCreated()));
@@ -66,8 +73,7 @@ public class PostDBStore {
 
     public void update(Post post) {
         try (Connection cn = pool.getConnection();
-             PreparedStatement ps =  cn.prepareStatement("UPDATE post SET name = ?, "
-                     + "description = ?, created = ?, visible = ?, city_id = ? where id = ?")
+             PreparedStatement ps =  cn.prepareStatement(UPDATE)
         ) {
             ps.setString(1, post.getName());
             ps.setString(2, post.getDescription());
@@ -83,17 +89,12 @@ public class PostDBStore {
 
     public Post findById(int id) {
         try (Connection cn = pool.getConnection();
-             PreparedStatement ps =  cn.prepareStatement("SELECT * FROM post WHERE id = ?")
+             PreparedStatement ps =  cn.prepareStatement(GET_BY_ID)
         ) {
             ps.setInt(1, id);
             try (ResultSet it = ps.executeQuery()) {
                 if (it.next()) {
-                    return new Post(it.getInt("id"),
-                            it.getString("name"),
-                            it.getString("description"),
-                            it.getDate("created").toLocalDate(),
-                            it.getBoolean("visible"),
-                            new City(it.getInt("city_id"), ""));
+                    return postOf(it);
                 }
             }
         } catch (Exception e) {
