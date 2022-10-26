@@ -6,7 +6,7 @@ import java.util.Objects;
 public class Candidate {
     private int id;
     private String name;
-    private String desc;
+    private String description;
     private LocalDate created;
     private City city;
     private byte[] photo;
@@ -17,8 +17,16 @@ public class Candidate {
     public Candidate(int id, String name, String desc, LocalDate created) {
         this.id = id;
         this.name = name;
-        this.desc = desc;
+        this.description = desc;
         this.created = created;
+    }
+
+    public Candidate(int id, String name, String desc, LocalDate created, City city) {
+        this.id = id;
+        this.name = name;
+        this.description = desc;
+        this.created = created;
+        this.city = city;
     }
 
     public int getId() {
@@ -29,8 +37,8 @@ public class Candidate {
         return name;
     }
 
-    public String getDesc() {
-        return desc;
+    public String getDescription() {
+        return description;
     }
 
     public LocalDate getCreated() {
@@ -45,8 +53,8 @@ public class Candidate {
         this.name = name;
     }
 
-    public void setDesc(String desc) {
-        this.desc = desc;
+    public void setDescription(String desc) {
+        this.description = desc;
     }
 
     public City getCity() {
