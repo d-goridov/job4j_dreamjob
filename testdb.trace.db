@@ -1,0 +1,36 @@
+2022-10-28 21:05:13 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Таблица "DATABASECHANGELOGLOCK" не найдена
+Table "DATABASECHANGELOGLOCK" not found; SQL statement:
+SELECT COUNT(*) FROM DATABASECHANGELOGLOCK [42102-200]
+2022-10-29 13:36:48 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Таблица "CANDIDATE" не найдена
+Table "CANDIDATE" not found; SQL statement:
+INSERT INTO candidate(name, description, created, city_id)  VALUES (?, ?, ?, ?) [42102-200]
+2022-10-29 14:28:09 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Таблица "CANDIDATE" не найдена
+Table "CANDIDATE" not found; SQL statement:
+INSERT INTO candidate(name, description, created, city_id)  VALUES (?, ?, ?, ?) [42102-200]
+2022-10-29 14:28:09 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Таблица "CANDIDATE" не найдена
+Table "CANDIDATE" not found; SQL statement:
+UPDATE candidate SET name = ?, description = ?, created = ?, city_id = ? where id = ? [42102-200]
+2022-10-29 14:28:53 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Таблица "CANDIDATE" не найдена
+Table "CANDIDATE" not found; SQL statement:
+INSERT INTO candidate(name, description, created, city_id)  VALUES (?, ?, ?, ?) [42102-200]
+2022-10-29 14:28:53 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Таблица "CANDIDATE" не найдена
+Table "CANDIDATE" not found; SQL statement:
+UPDATE candidate SET name = ?, description = ?, created = ?, city_id = ? where id = ? [42102-200]
+2022-10-29 14:29:59 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Таблица "CANDIDATE" не найдена
+Table "CANDIDATE" not found; SQL statement:
+INSERT INTO candidate(name, description, created, city_id)  VALUES (?, ?, ?, ?) [42102-200]
+2022-10-29 14:29:59 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Таблица "CANDIDATE" не найдена
+Table "CANDIDATE" not found; SQL statement:
+UPDATE candidate SET name = ?, description = ?, created = ?, city_id = ? where id = ? [42102-200]
+2022-10-29 14:33:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Таблица "CANDIDATE" не найдена
+Table "CANDIDATE" not found; SQL statement:
+INSERT INTO candidate(name, description, created, city_id)  VALUES (?, ?, ?, ?) [42102-200]

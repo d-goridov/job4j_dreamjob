@@ -20,7 +20,7 @@ public class CandidateDBStore {
             + " VALUES (?, ?, ?, ?)";
     private static final String UPDATE = "UPDATE candidate SET name = ?, description = ?, created = ?, "
             + "city_id = ? where id = ?";
-    private static final String GET_BY_ID = "SELECT * FROM post WHERE id = ?";
+    private static final String GET_BY_ID = "SELECT * FROM candidate WHERE id = ?";
     private static final Logger LOG = LoggerFactory.getLogger(PostDBStore.class.getName());
     private final BasicDataSource pool;
 
