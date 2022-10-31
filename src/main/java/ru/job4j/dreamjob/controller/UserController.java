@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import ru.job4j.dreamjob.model.User;
 import ru.job4j.dreamjob.service.UserService;
 
+import java.util.Optional;
+
 @Controller
 @ThreadSafe
 public class UserController {
@@ -20,11 +22,11 @@ public class UserController {
 
     @PostMapping("/registration")
     public String registration(Model model, @ModelAttribute User user) {
-        if (userService.findUserByEmail(user.getEmail()) != null) {
+        Optional<User> regUser = userService.add(user);
+        if (regUser.isEmpty()) {
             model.addAttribute("message", "Пользователь с такой почтой уже существует");
             return "redirect:/fail";
         }
-        userService.add(user);
         return "redirect:/success";
     }
 }

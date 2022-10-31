@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 import ru.job4j.dreamjob.model.User;
 
 import java.sql.*;
+import java.util.Optional;
 
 
 @Repository
@@ -31,7 +32,8 @@ public class UserDBStore {
                 resultset.getString("password"));
     }
 
-    public User add(User user) {
+    public Optional<User> add(User user) {
+        Optional<User> rsl = Optional.empty();
         try (Connection cn = pool.getConnection();
              PreparedStatement ps = cn.prepareStatement(INSERT, PreparedStatement.RETURN_GENERATED_KEYS)) {
             ps.setString(1, user.getName());
@@ -41,27 +43,29 @@ public class UserDBStore {
             try (ResultSet id = ps.getGeneratedKeys()) {
                 if (id.next()) {
                     user.setId(id.getInt(1));
+                    rsl = Optional.of(user);
                 }
             }
         } catch (Exception e) {
             LOG.error(e.getMessage(), e);
         }
-        return user;
+        return rsl;
     }
 
-    public User findUserByEmail(String email) {
+    public Optional<User> findUserByEmail(String email) {
+        Optional<User> rsl = Optional.empty();
         try (Connection cn = pool.getConnection();
              PreparedStatement ps =  cn.prepareStatement(GET_BY_EMAIL)
         ) {
             ps.setString(1, email);
             try (ResultSet it = ps.executeQuery()) {
                 if (it.next()) {
-                    return userOf(it);
+                    rsl = Optional.of(userOf(it));
                 }
             }
         } catch (Exception e) {
             LOG.error(e.getMessage(), e);
         }
-        return null;
+        return rsl;
     }
 }
