@@ -18,6 +18,8 @@ public class UserDBStore {
 
     private static final String GET_BY_EMAIL = "SELECT * FROM users WHERE email = ?";
 
+    private static final String GET_BY_EMAIL_PASSWORD = "SELECT * FROM users WHERE email = ? AND password = ?";
+
     private static final Logger LOG = LoggerFactory.getLogger(PostDBStore.class.getName());
     private final BasicDataSource pool;
 
@@ -58,6 +60,24 @@ public class UserDBStore {
              PreparedStatement ps =  cn.prepareStatement(GET_BY_EMAIL)
         ) {
             ps.setString(1, email);
+            try (ResultSet it = ps.executeQuery()) {
+                if (it.next()) {
+                    rsl = Optional.of(userOf(it));
+                }
+            }
+        } catch (Exception e) {
+            LOG.error(e.getMessage(), e);
+        }
+        return rsl;
+    }
+
+    public Optional<User> findUserByEmailAndPassword(String email, String password) {
+        Optional<User> rsl = Optional.empty();
+        try (Connection cn = pool.getConnection();
+             PreparedStatement ps =  cn.prepareStatement(GET_BY_EMAIL_PASSWORD)
+        ) {
+            ps.setString(1, email);
+            ps.setString(2, password);
             try (ResultSet it = ps.executeQuery()) {
                 if (it.next()) {
                     rsl = Optional.of(userOf(it));
