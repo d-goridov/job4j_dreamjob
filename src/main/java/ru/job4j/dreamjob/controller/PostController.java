@@ -31,11 +31,7 @@ public class PostController {
 
     @GetMapping("/posts")
     public String posts(Model model, HttpSession session) {
-        User user = (User) session.getAttribute("user");
-        if (user == null) {
-            user = new User();
-            user.setName("Гость");
-        }
+        User user = UserSession.getUser(session);
         model.addAttribute("user", user);
         model.addAttribute("posts", postService.findAll());
         return "posts";
