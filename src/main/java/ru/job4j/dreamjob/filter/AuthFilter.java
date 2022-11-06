@@ -12,7 +12,7 @@ import java.util.List;
 public class AuthFilter implements Filter {
 
     private static final List<String> FILTER =
-            List.of("fail", "index", "registration", "success", "loginPage", "login");
+            List.of("fail", "index", "registration", "success", "loginPage", "login", "formAddUser");
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response,
